@@ -11,25 +11,17 @@ def syncFile(x, y):
 
 # syncFile(sourcedir, targetdir)
 
-filename = "test.png"
+filename = "test.mkv"
 files_chunks_name = ''
 splitter_mode = 0
 chunks = 3
 
 file_size = 0
-with open(filename, "rb") as fr:
-    file_size = len(fr.read())
-
-
-# files = open(filename, "rb")
-# data = files.read()
-# file_size = len(data)
-
+with open(filename, "rb") as frb:
+    for line in frb:
+        file_size += len(line)
 chunks_size = math.ceil(file_size/chunks)
 print(f"Размер чанка: {chunks_size/1024} килобайт")
-# files.close()
-
-
 
 
 
@@ -45,4 +37,4 @@ files.close()
 with open('output/stapler.bat', 'a') as fs:
     fs.write(f'Copy /b {files_chunks_name[1:]} "chunks"\nRename "chunks" "{filename}"\nDel {files_chunks_name.replace("+", " ")} "stapler.bat"')
 
-print("Файлы записаны")
+print("Файл поделён")
